@@ -1,0 +1,371 @@
+Test Description and Analysis:
+	For project 3, we have 3 directories that contain our test cases. The first directory is somestufftotest. It contains the test cases b.txt (hi there hi there) and c.txt (hi our THERE hi), the two test cases are based on the example provided by the instructions for KLD and JSD calculation. Looking at our output for the two files’ comparison, we have an output of “./somestufftotest/testcases/b.txt and ./somestufftotest/testcases/c.txt has a total of 8 words and a JSD: 0.046852” which the JSD is the same as the JSD given in the instructions. Thus, we know our code produces the same output as the instruction wanted. Also in somestufftotest, we have two other directories: blank and copy.
+	Blank directory contains two blank files, though they are files that do not contain tokens, they should still be considered in the formula. According to a question on the discussion board on Piazza (answer provided by Prof. Menendez), blank files when compared with files that do have tokens would result in a JSD of about 0.15 and if compared with another blank file, it would result in a JSD of 0.00. Looking at our output, the JSD of the mentioned conditions were the same. Thus, our code also takes into account the possibility of blank files in directories.
+	Lastly, the directory copy, contains two files copy1.txt and copy2.txt. The two files are purposely identical to the files in the directory testcases, with the exception the characters are capitalized. This is to test our programs ability to ignore case difference and produce the expected result of JSD 0.00. And as we expected, the program was able to see the two files as identical to our testcases’s files, outputting a JSD of 0.00. Thus our program is a success in this situation.
+	The description above are for test cases we believe to be standard cases from what the project is expected to do. The next three directories contain files we thought of ourselves. The first directory is hyphen. This directory tests our programs ability to tokenize the words in the file. According to the project’s instructions, characters that are alphabetic or hyphen are includes, whitespace creates tokens, and any other character would be ignored (0-9, punctuation, and so one). The results of our hyphen directory input shows that our program could ignore characters that are not hyphens and alphabets and correctly identify words that are the same after ignoring unwanted characters. The JSD was also successful for the hyphen directory.
+	The second extra directory we created is the directory “food,” (I was hungry!). This directory contains over 50 words each (except for blank.txt, it is there to test if blank can still be identified in many tokens situation). The KLD and JSD calculation would result in a number of comparisons that involve over 100 words. Our tokenizer and calculation were able to ran successfully, and the program did not break or produce error and produced the correct JSD result, showing our program could handle long worded files.
+	The last extra directory we created is the directory “alone.” This directory purposely only contain one file. According to the instructions, when there are only one or zero accessible file in the directory and subdirectories combined, then the  program should emit a warning and stop. Looking at our output, that was what our program did.
+
+Testcases:
+
+somestufftotest->
+	
+	testcases->
+		a.txt:
+			hi There
+		b.txt:
+			hi there hi there
+		c.txt:
+			hi out THERE hi
+	blank->
+		blank1.txt:
+		blank2.txt:
+	copy->
+		copy1.txt:
+			HI OUT THERE
+		copy2.txt:
+			HELLO IN HERE
+
+Extra:
+hyphen->
+	hyphen1.txt:
+		we-we we---we we-- -we
+		we'again
+		we1991again
+		+=we
+		we123//
+		we99-we
+		---------
+	hyphen2.txt:
+		another-test
+		we need -more mo-re more-
+
+food->
+	blank->
+		blank.txt:
+	cheese->
+		cottage.txt:
+			It is one of the common types of cheese that you use in your daily life and has its origin in India. Made from full cream milk by curdling it and then draining the water completely, it's rich in nutrition, and is very delicate and soft, which you can digest easily. It has a mildly sweet flavour and can be used to make a lot of Indian dishes such as Palak Paneer, Shahi Paneer, Paneer Tikka, and Salads, much more.
+		mozzarella.txt:
+			It originated in Southern Italy and is traditionally made from buffalo milk, however, these days mozzarella is also made from cow and sheep milk. It has a mild flavour with a soft & chewy texture and is used to prepare lots of baking dishes like Lasagna and Pizza. When used in the fresh form, you can use mozzarella cheese for sandwiches and even some salads.
+	drinks->
+		coke.txt:
+			Cola is a sweetened, carbonated soft drink flavored with vanilla, cinnamon, citrus oils and other flavorings. Most contain caffeine, which was originally sourced from the kola nut, leading to the drink's name, though other sources are now also used. Cola became popular worldwide after pharmacist John Pemberton invented Coca-Cola in 1886, which was later imitated by other manufacturers. His non-alcoholic recipe was inspired by the coca wine of pharmacist Angelo Mariani, created in 1863.
+		snapple.txt:
+			Snapple is a brand of tea and juice drinks which is owned by Keurig Dr Pepper and based in Plano, Texas, United States. The company (and brand), which was originally known as Unadulterated Food Products, was founded in 1972. The brand achieved some fame due to various pop-culture references including television shows.
+
+alone->
+	alone.txt:
+		i am alone
+
+
+OUTPUTS:
+SOMESTUFFTOTEST-
+dty16@ilab1:~/cs214/Asst2$ ./detector "./somestufftotest"
+1. Filename: ./somestufftotest/blank/blank1.txt, total words: 0
+2. Filename: ./somestufftotest/testcases/a.txt, total words: 2
+hi appeared 1 times, ratio 0.50000
+there appeared 1 times, ratio 0.50000
+3. Filename: ./somestufftotest/testcases/b.txt, total words: 4
+hi appeared 2 times, ratio 0.50000
+there appeared 2 times, ratio 0.50000
+4. Filename: ./somestufftotest/copy/copy1.txt, total words: 3
+hi appeared 1 times, ratio 0.33333
+out appeared 1 times, ratio 0.33333
+there appeared 1 times, ratio 0.33333
+5. Filename: ./somestufftotest/testcases/c.txt, total words: 4
+hi appeared 2 times, ratio 0.50000
+out appeared 1 times, ratio 0.25000
+there appeared 1 times, ratio 0.25000
+6. Filename: ./somestufftotest/blank/blank2.txt, total words: 0
+7. Filename: ./somestufftotest/copy/copy2.txt, total words: 3
+hello appeared 1 times, ratio 0.33333
+here appeared 1 times, ratio 0.33333
+in appeared 1 times, ratio 0.33333
+JSD COMPARISON:
+1. ./somestufftotest/blank/blank1.txt and ./somestufftotest/blank/blank2.txt has a total of 0 words and a JSD: 0.000000
+2. ./somestufftotest/blank/blank1.txt and ./somestufftotest/testcases/a.txt has a total of 2 words and a JSD: 0.150515
+3. ./somestufftotest/testcases/a.txt and ./somestufftotest/blank/blank2.txt has a total of 2 words and a JSD: 0.150515
+4. ./somestufftotest/blank/blank1.txt and ./somestufftotest/copy/copy2.txt has a total of 3 words and a JSD: 0.150515
+5. ./somestufftotest/blank/blank1.txt and ./somestufftotest/copy/copy1.txt has a total of 3 words and a JSD: 0.150515
+6. ./somestufftotest/copy/copy1.txt and ./somestufftotest/blank/blank2.txt has a total of 3 words and a JSD: 0.150515
+7. ./somestufftotest/blank/blank2.txt and ./somestufftotest/copy/copy2.txt has a total of 3 words and a JSD: 0.150515
+8. ./somestufftotest/testcases/b.txt and ./somestufftotest/blank/blank2.txt has a total of 4 words and a JSD: 0.150515
+9. ./somestufftotest/blank/blank1.txt and ./somestufftotest/testcases/c.txt has a total of 4 words and a JSD: 0.150515
+10. ./somestufftotest/testcases/c.txt and ./somestufftotest/blank/blank2.txt has a total of 4 words and a JSD: 0.150515
+11. ./somestufftotest/blank/blank1.txt and ./somestufftotest/testcases/b.txt has a total of 4 words and a JSD: 0.150515
+12. ./somestufftotest/testcases/a.txt and ./somestufftotest/copy/copy1.txt has a total of 5 words and a JSD: 0.057459
+13. ./somestufftotest/testcases/a.txt and ./somestufftotest/copy/copy2.txt has a total of 5 words and a JSD: 0.301030
+14. ./somestufftotest/copy/copy1.txt and ./somestufftotest/copy/copy2.txt has a total of 6 words and a JSD: 0.301030
+15. ./somestufftotest/testcases/a.txt and ./somestufftotest/testcases/b.txt has a total of 6 words and a JSD: 0.000000
+16. ./somestufftotest/testcases/a.txt and ./somestufftotest/testcases/c.txt has a total of 6 words and a JSD: 0.046852
+17. ./somestufftotest/testcases/b.txt and ./somestufftotest/copy/copy2.txt has a total of 7 words and a JSD: 0.301030
+18. ./somestufftotest/copy/copy1.txt and ./somestufftotest/testcases/c.txt has a total of 7 words and a JSD: 0.006238
+19. ./somestufftotest/testcases/c.txt and ./somestufftotest/copy/copy2.txt has a total of 7 words and a JSD: 0.301030
+20. ./somestufftotest/testcases/b.txt and ./somestufftotest/copy/copy1.txt has a total of 7 words and a JSD: 0.057459
+21. ./somestufftotest/testcases/b.txt and ./somestufftotest/testcases/c.txt has a total of 8 words and a JSD: 0.046852
+
+HYPHEN-
+dty16@ilab1:~/cs214/Asst2$ ./detector "./hyphen"
+1. Filename: ./hyphen/hyphen1.txt, total words: 10
+--------- appeared 1 times, ratio 0.10000
+-we appeared 1 times, ratio 0.10000
+we appeared 2 times, ratio 0.20000
+we-- appeared 1 times, ratio 0.10000
+we---we appeared 1 times, ratio 0.10000
+we-we appeared 2 times, ratio 0.20000
+weagain appeared 2 times, ratio 0.20000
+2. Filename: ./hyphen/hyphen2.txt, total words: 6
+-more appeared 1 times, ratio 0.16667
+another-test appeared 1 times, ratio 0.16667
+mo-re appeared 1 times, ratio 0.16667
+more- appeared 1 times, ratio 0.16667
+need appeared 1 times, ratio 0.16667
+we appeared 1 times, ratio 0.16667
+JSD COMPARISON:
+1. ./hyphen/hyphen1.txt and ./hyphen/hyphen2.txt has a total of 16 words and a JSD: 0.246171
+
+FOOD-
+dty16@ilab1:~/cs214/Asst2$ ./detector "./food"
+1. Filename: ./food/drinks/snapple.txt, total words: 51
+a appeared 1 times, ratio 0.01961
+achieved appeared 1 times, ratio 0.01961
+and appeared 3 times, ratio 0.05882
+as appeared 1 times, ratio 0.01961
+based appeared 1 times, ratio 0.01961
+brand appeared 3 times, ratio 0.05882
+by appeared 1 times, ratio 0.01961
+company appeared 1 times, ratio 0.01961
+dr appeared 1 times, ratio 0.01961
+drinks appeared 1 times, ratio 0.01961
+due appeared 1 times, ratio 0.01961
+fame appeared 1 times, ratio 0.01961
+food appeared 1 times, ratio 0.01961
+founded appeared 1 times, ratio 0.01961
+in appeared 2 times, ratio 0.03922
+including appeared 1 times, ratio 0.01961
+is appeared 2 times, ratio 0.03922
+juice appeared 1 times, ratio 0.01961
+keurig appeared 1 times, ratio 0.01961
+known appeared 1 times, ratio 0.01961
+of appeared 1 times, ratio 0.01961
+originally appeared 1 times, ratio 0.01961
+owned appeared 1 times, ratio 0.01961
+pepper appeared 1 times, ratio 0.01961
+plano appeared 1 times, ratio 0.01961
+pop-culture appeared 1 times, ratio 0.01961
+products appeared 1 times, ratio 0.01961
+references appeared 1 times, ratio 0.01961
+shows appeared 1 times, ratio 0.01961
+snapple appeared 1 times, ratio 0.01961
+some appeared 1 times, ratio 0.01961
+states appeared 1 times, ratio 0.01961
+tea appeared 1 times, ratio 0.01961
+television appeared 1 times, ratio 0.01961
+texas appeared 1 times, ratio 0.01961
+the appeared 2 times, ratio 0.03922
+to appeared 1 times, ratio 0.01961
+unadulterated appeared 1 times, ratio 0.01961
+united appeared 1 times, ratio 0.01961
+various appeared 1 times, ratio 0.01961
+was appeared 2 times, ratio 0.03922
+which appeared 2 times, ratio 0.03922
+2. Filename: ./food/drinks/coke.txt, total words: 72
+a appeared 1 times, ratio 0.01389
+after appeared 1 times, ratio 0.01389
+also appeared 1 times, ratio 0.01389
+and appeared 1 times, ratio 0.01389
+angelo appeared 1 times, ratio 0.01389
+are appeared 1 times, ratio 0.01389
+became appeared 1 times, ratio 0.01389
+by appeared 2 times, ratio 0.02778
+caffeine appeared 1 times, ratio 0.01389
+carbonated appeared 1 times, ratio 0.01389
+cinnamon appeared 1 times, ratio 0.01389
+citrus appeared 1 times, ratio 0.01389
+coca appeared 1 times, ratio 0.01389
+coca-cola appeared 1 times, ratio 0.01389
+cola appeared 2 times, ratio 0.02778
+contain appeared 1 times, ratio 0.01389
+created appeared 1 times, ratio 0.01389
+drink appeared 1 times, ratio 0.01389
+drinks appeared 1 times, ratio 0.01389
+flavored appeared 1 times, ratio 0.01389
+flavorings appeared 1 times, ratio 0.01389
+from appeared 1 times, ratio 0.01389
+his appeared 1 times, ratio 0.01389
+imitated appeared 1 times, ratio 0.01389
+in appeared 2 times, ratio 0.02778
+inspired appeared 1 times, ratio 0.01389
+invented appeared 1 times, ratio 0.01389
+is appeared 1 times, ratio 0.01389
+john appeared 1 times, ratio 0.01389
+kola appeared 1 times, ratio 0.01389
+later appeared 1 times, ratio 0.01389
+leading appeared 1 times, ratio 0.01389
+manufacturers appeared 1 times, ratio 0.01389
+mariani appeared 1 times, ratio 0.01389
+most appeared 1 times, ratio 0.01389
+name appeared 1 times, ratio 0.01389
+non-alcoholic appeared 1 times, ratio 0.01389
+now appeared 1 times, ratio 0.01389
+nut appeared 1 times, ratio 0.01389
+of appeared 1 times, ratio 0.01389
+oils appeared 1 times, ratio 0.01389
+originally appeared 1 times, ratio 0.01389
+other appeared 3 times, ratio 0.04167
+pemberton appeared 1 times, ratio 0.01389
+pharmacist appeared 2 times, ratio 0.02778
+popular appeared 1 times, ratio 0.01389
+recipe appeared 1 times, ratio 0.01389
+soft appeared 1 times, ratio 0.01389
+sourced appeared 1 times, ratio 0.01389
+sources appeared 1 times, ratio 0.01389
+sweetened appeared 1 times, ratio 0.01389
+the appeared 3 times, ratio 0.04167
+though appeared 1 times, ratio 0.01389
+to appeared 1 times, ratio 0.01389
+used appeared 1 times, ratio 0.01389
+vanilla appeared 1 times, ratio 0.01389
+was appeared 3 times, ratio 0.04167
+which appeared 2 times, ratio 0.02778
+wine appeared 1 times, ratio 0.01389
+with appeared 1 times, ratio 0.01389
+worldwide appeared 1 times, ratio 0.01389
+3. Filename: ./food/cheese/cottage.txt, total words: 80
+a appeared 2 times, ratio 0.02500
+and appeared 6 times, ratio 0.07500
+as appeared 1 times, ratio 0.01250
+be appeared 1 times, ratio 0.01250
+by appeared 1 times, ratio 0.01250
+can appeared 2 times, ratio 0.02500
+cheese appeared 1 times, ratio 0.01250
+common appeared 1 times, ratio 0.01250
+completely appeared 1 times, ratio 0.01250
+cream appeared 1 times, ratio 0.01250
+curdling appeared 1 times, ratio 0.01250
+daily appeared 1 times, ratio 0.01250
+delicate appeared 1 times, ratio 0.01250
+digest appeared 1 times, ratio 0.01250
+dishes appeared 1 times, ratio 0.01250
+draining appeared 1 times, ratio 0.01250
+easily appeared 1 times, ratio 0.01250
+flavour appeared 1 times, ratio 0.01250
+from appeared 1 times, ratio 0.01250
+full appeared 1 times, ratio 0.01250
+has appeared 2 times, ratio 0.02500
+in appeared 3 times, ratio 0.03750
+india appeared 1 times, ratio 0.01250
+indian appeared 1 times, ratio 0.01250
+is appeared 2 times, ratio 0.02500
+it appeared 3 times, ratio 0.03750
+its appeared 2 times, ratio 0.02500
+life appeared 1 times, ratio 0.01250
+lot appeared 1 times, ratio 0.01250
+made appeared 1 times, ratio 0.01250
+make appeared 1 times, ratio 0.01250
+mildly appeared 1 times, ratio 0.01250
+milk appeared 1 times, ratio 0.01250
+more appeared 1 times, ratio 0.01250
+much appeared 1 times, ratio 0.01250
+nutrition appeared 1 times, ratio 0.01250
+of appeared 3 times, ratio 0.03750
+one appeared 1 times, ratio 0.01250
+origin appeared 1 times, ratio 0.01250
+palak appeared 1 times, ratio 0.01250
+paneer appeared 3 times, ratio 0.03750
+rich appeared 1 times, ratio 0.01250
+salads appeared 1 times, ratio 0.01250
+shahi appeared 1 times, ratio 0.01250
+soft appeared 1 times, ratio 0.01250
+such appeared 1 times, ratio 0.01250
+sweet appeared 1 times, ratio 0.01250
+that appeared 1 times, ratio 0.01250
+the appeared 2 times, ratio 0.02500
+then appeared 1 times, ratio 0.01250
+tikka appeared 1 times, ratio 0.01250
+to appeared 1 times, ratio 0.01250
+types appeared 1 times, ratio 0.01250
+use appeared 1 times, ratio 0.01250
+used appeared 1 times, ratio 0.01250
+very appeared 1 times, ratio 0.01250
+water appeared 1 times, ratio 0.01250
+which appeared 1 times, ratio 0.01250
+you appeared 2 times, ratio 0.02500
+your appeared 1 times, ratio 0.01250
+4. Filename: ./food/blank/blank.txt, total words: 0
+5. Filename: ./food/cheese/mozzarella.txt, total words: 64
+a appeared 2 times, ratio 0.03125
+also appeared 1 times, ratio 0.01562
+and appeared 5 times, ratio 0.07812
+baking appeared 1 times, ratio 0.01562
+buffalo appeared 1 times, ratio 0.01562
+can appeared 1 times, ratio 0.01562
+cheese appeared 1 times, ratio 0.01562
+chewy appeared 1 times, ratio 0.01562
+cow appeared 1 times, ratio 0.01562
+days appeared 1 times, ratio 0.01562
+dishes appeared 1 times, ratio 0.01562
+even appeared 1 times, ratio 0.01562
+flavour appeared 1 times, ratio 0.01562
+for appeared 1 times, ratio 0.01562
+form appeared 1 times, ratio 0.01562
+fresh appeared 1 times, ratio 0.01562
+from appeared 2 times, ratio 0.03125
+has appeared 1 times, ratio 0.01562
+however appeared 1 times, ratio 0.01562
+in appeared 2 times, ratio 0.03125
+is appeared 3 times, ratio 0.04688
+it appeared 2 times, ratio 0.03125
+italy appeared 1 times, ratio 0.01562
+lasagna appeared 1 times, ratio 0.01562
+like appeared 1 times, ratio 0.01562
+lots appeared 1 times, ratio 0.01562
+made appeared 2 times, ratio 0.03125
+mild appeared 1 times, ratio 0.01562
+milk appeared 2 times, ratio 0.03125
+mozzarella appeared 2 times, ratio 0.03125
+of appeared 1 times, ratio 0.01562
+originated appeared 1 times, ratio 0.01562
+pizza appeared 1 times, ratio 0.01562
+prepare appeared 1 times, ratio 0.01562
+salads appeared 1 times, ratio 0.01562
+sandwiches appeared 1 times, ratio 0.01562
+sheep appeared 1 times, ratio 0.01562
+soft appeared 1 times, ratio 0.01562
+some appeared 1 times, ratio 0.01562
+southern appeared 1 times, ratio 0.01562
+texture appeared 1 times, ratio 0.01562
+the appeared 1 times, ratio 0.01562
+these appeared 1 times, ratio 0.01562
+to appeared 1 times, ratio 0.01562
+traditionally appeared 1 times, ratio 0.01562
+use appeared 1 times, ratio 0.01562
+used appeared 2 times, ratio 0.03125
+when appeared 1 times, ratio 0.01562
+with appeared 1 times, ratio 0.01562
+you appeared 1 times, ratio 0.01562
+JSD COMPARISON:
+1. ./food/drinks/snapple.txt and ./food/blank/blank.txt has a total of 51 words and a JSD: 0.150515
+2. ./food/blank/blank.txt and ./food/cheese/mozzarella.txt has a total of 64 words and a JSD: 0.150515
+3. ./food/drinks/coke.txt and ./food/blank/blank.txt has a total of 72 words and a JSD: 0.150515
+4. ./food/cheese/cottage.txt and ./food/blank/blank.txt has a total of 80 words and a JSD: 0.150515
+5. ./food/drinks/snapple.txt and ./food/cheese/mozzarella.txt has a total of 115 words and a JSD: 0.227081
+6. ./food/drinks/snapple.txt and ./food/drinks/coke.txt has a total of 123 words and a JSD: 0.210976
+7. ./food/drinks/snapple.txt and ./food/cheese/cottage.txt has a total of 131 words and a JSD: 0.216104
+8. ./food/drinks/coke.txt and ./food/cheese/mozzarella.txt has a total of 136 words and a JSD: 0.229000
+9. ./food/cheese/cottage.txt and ./food/cheese/mozzarella.txt has a total of 144 words and a JSD: 0.156340
+10. ./food/drinks/coke.txt and ./food/cheese/cottage.txt has a total of 152 words and a JSD: 0.229210
+
+ALONE-
+dty16@ilab1:~/cs214/Asst2$ ./detector "./alone"
+WARNING: NOT ENOUGH FILES, ONLY 1 FILES FOUND
+
+Additional Information:
+This program is a linked list of linked list data structure. The files makes up our first linked list, and the structure of the files contains a linked list for storing the word nodes that appear in the files opened. This project tests our understanding and ability to use multithreading to run our code. We have successfully applied multithread, pthread_create, pthread_join, and mutex to our code and was able to produce desirable results. From this project, we learned the flexibility of multithreading and its ability to run multiple applications at the same time, saving time for the programmer.
+Our program would list the files in the directory and subdirectory and list the words that appeared in the files alphabetically and the number of times the words appeared. And after listing all the files in the directory and subdirectory, our program would show the results of the JSD comparison of all the files with one another in different colors (cannot be shown in this testcases.txt file) as according to instructions.
+Now for algorithm.
+For this project, though our program made the words that appeared in the files into tokens, but we did not use the tokenizer function. Instead we read each character that appeared in the file. This was because, according to the instructions, we only want hyphens and alphabets, anything else should be ignored and omitted. Thus even after we tokenize the file into word tokens, we would still have to go through every single token to check if they follow the instructions. So we set up if else conditions for each character we read from the file instead. If the character is a alphabet or a hyphen it would be read as part of the word we are creating, if it is anything else, it would be omitted. Finally the word would be completed when it is a white space.
+After we have completed creating a word, it would be stored in file's linked list, adding to the word list linked list (linked list of linked list). After the file is closed, which means all characters are read and made into word nodes, we used the sortList function to sort the word linked list alphabetically (for in order to do the KLD calculation we need the word nodes to be in alphabetical order). After this is complete, the program would beginning applying the KLD calculation and finally the JSD results.
+In the program, we also created another linked list that records the total sum of words that appeared in both files, the JSD, and the names of the first and second files. The total number of words is necessary, for according to instructions we need to print the JSD output from smallest to greatest number of words. Going back to our outputs above, our program has done exactly so, thus completing the project.
+There were many things we hoped to try for this project, but due to the concerns of time, we were not able to do so. We strongly encourage young programmers to try this project, it will greatly improve their understanding of multithread and ability to plan, built, and test a project.
